@@ -1,0 +1,78 @@
+<div class="home-page">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Descubre Tu Próximo Libro Favorito</h1>
+      <p class="hero-subtitle">Explora nuestra colección de libros, lee reseñas de otros lectores y encuentra tu próxima gran lectura.</p>
+    </div>
+  </section>
+
+  <!-- Top Rated Books Section -->
+  <% if @top_rated_books.any? %>
+  <section class="books-section">
+    <div class="container">
+      <h2 class="section-title">📚 Libros Mejor Valorados</h2>
+      <div class="books-grid">
+        <% @top_rated_books.each do |book| %>
+          <div class="book-card">
+            <h3 class="book-title"><%= book.title %></h3>
+            <p class="book-author">por <%= book.author %></p>
+            <div class="book-rating">
+              <span class="rating-stars">⭐ <%= book.average_rating %></span>
+              <span class="reviews-count">(<%= book.reviews_count %> reseñas)</span>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+  <% end %>
+
+  <!-- Recent Books Section -->
+  <% if @recent_books.any? %>
+  <section class="books-section">
+    <div class="container">
+      <h2 class="section-title">🆕 Libros Recientes</h2>
+      <div class="books-grid">
+        <% @recent_books.each do |book| %>
+          <div class="book-card">
+            <h3 class="book-title"><%= book.title %></h3>
+            <p class="book-author">por <%= book.author %></p>
+            <% if book.average_rating %>
+              <div class="book-rating">
+                <span class="rating-stars">⭐ <%= book.average_rating %></span>
+                <span class="reviews-count">(<%= book.reviews_count %> reseñas)</span>
+              </div>
+            <% else %>
+              <p class="no-reviews">Aún no hay reseñas suficientes</p>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+  <% end %>
+
+  <!-- Stats Section -->
+  <section class="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number"><%= @total_books %></div>
+          <div class="stat-label">Libros Disponibles</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number"><%= @total_reviews %></div>
+          <div class="stat-label">Reseñas Totales</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number"><%= @top_rated_books.count %></div>
+          <div class="stat-label">Libros Top</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- React Integration Points -->
+  <div id="books-carousel"></div>
+</div>
